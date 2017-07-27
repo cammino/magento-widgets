@@ -1,0 +1,46 @@
+<?php
+$modelBanners = Mage::getModel('banners/banners');
+$areaId = $this->getAreaId();
+$htmlId = $this->getHtmlId();
+$htmlClass = $this->getHtmlClass();
+$imageColumns = $this->getImageColumns();
+$banners = $modelBanners->getSlides($areaId);
+
+$error['status'] = false;
+
+if( strlen($areaId) < 1 ){
+	$error['status'] = true;
+	$error['message'] = "'area_id' não informado";
+}else if( count($banners) < 1 ){
+	$error['status'] = true;
+	$error['message'] = "não foi encontrado imagens para o banner '".$areaId."'";
+}
+?>
+
+<?php if(!$error['status']): ?>
+	<section class="mini-banners-section default-section <?php echo $htmlClass ?>" <?php echo strlen($htmlId) > 0 ? 'id="'.$htmlId.'"' : "" ?>>
+		<div class="mini-banners-section-container default-section-container">
+			<?php $columnX = 1; ?>
+			<?php $columnCount = 1; ?>
+			<?php foreach ($banners as $banner): ?>
+				<?php if($columnX == 1): ?>
+					<div class="column column-<?php echo $imageColumns?>">
+				<?php endif; ?>
+					<a href="<?php echo $banner['url']; ?>" class="link">
+						<img src="<?php echo $modelBanners->getFilePath() . $banner['filename']; ?>" alt="<?php echo $banner['title']; ?>" class="image">
+				    </a>
+				<?php if($columnX == intval($imageColumns) || $columnCount == intval(count($banners))): ?>
+					<?php $columnX = 0; ?>
+					</div>
+				<?php endif; ?>
+				<?php $columnX++; $columnCount++; ?>
+			<?php endforeach; ?>
+		</div>
+	</section>
+<?php else: ?>
+	<div class="default-section">
+		<div class="default-section-container">
+			<p><?php echo $error['message']; ?></p>
+		</div>
+	</div>
+<?php endif; ?>
