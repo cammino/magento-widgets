@@ -1,0 +1,46 @@
+<?php
+$modelBanners = Mage::getModel('banners/banners');
+$areaId = $this->getAreaId();
+$htmlId = $this->getHtmlId();
+$htmlClass = $this->getHtmlClass();
+$banners = $modelBanners->getSlides($areaId);
+
+$error['status'] = false;
+
+if( strlen($areaId) < 1 ){
+	$error['status'] = true;
+	$error['message'] = "'area_id' não informado";
+}else if( strlen($htmlId) < 1 ){
+	$error['status'] = true;
+	$error['message'] = "'html_id' não informado";
+}else if( count($banners) < 1 ){
+	$error['status'] = true;
+	$error['message'] = "não foi encontrado imagens para o banner '".$areaId."'";
+}
+?>
+
+<?php if(!$error['status']): ?>
+	<section class="banner-principal-section default-section <?php echo $htmlClass; ?>" id="<?php echo $htmlId; ?>">
+		<div class="banner-principal-section-container default-section-container">
+			<?php foreach ($banners as $banner): ?>
+				<a href="<?php echo $banner['url']; ?>">
+					<img src="<?php echo $modelBanners->getFilePath() . $banner['filename']; ?>" alt="<?php echo $banner['title']; ?>" class="image">
+			    </a>
+			<?php endforeach; ?>
+		</div>
+	</section>
+	<script>
+		jQuery(document).ready(function($) {
+			$("#<?php echo $htmlId ?> .banner-principal-section-container").slick({
+				prevArrow: "<button type='button' class='slick-prev slick-arrow'></button>",
+				nextArrow: "<button type='button' class='slick-next slick-arrow'></button>"
+			});
+		});
+	</script>
+<?php else: ?>
+	<div class="default-section">
+		<div class="default-section-container">
+			<p><?php echo $error['message']; ?></p>
+		</div>
+	</div>
+<?php endif; ?>
