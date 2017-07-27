@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Cammino_Widgets>
+            <version>0.0.1</version>
+        </Cammino_Widgets>
+    </modules>
+</config>
