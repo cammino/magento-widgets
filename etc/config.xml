@@ -16,5 +16,13 @@
                 <class>Cammino_Widgets_Helper</class>
             </camminowidgets>
         </helpers>
+        <resources>
+            <camminowidgets_setup>
+                <setup>
+                    <module>Cammino_Widgets</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+            </camminowidgets_setup>
+        </resources>
 	</global>
 </config>
