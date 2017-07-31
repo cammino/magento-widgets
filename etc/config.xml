@@ -11,5 +11,10 @@
 				<class>Cammino_Widgets_Block</class>
 			</camminowidgets>
 		</blocks>
+		<helpers>
+            <camminowidgets>
+                <class>Cammino_Widgets_Helper</class>
+            </camminowidgets>
+        </helpers>
 	</global>
 </config>
