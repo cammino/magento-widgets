@@ -15,13 +15,18 @@ class Cammino_Widgets_Helper_Data extends Mage_Core_Helper_Abstract
         return $percentage;
 	}
 
-	public function getDiscountBoxHtml($product){
+	public function getDiscountBoxHtml($product, $label = "% OFF"){
 		$discount = $this->getPercentageDiscount($product);
+		$html = "";
+
 		if($discount > 0){
-			return "<div class='discount-box'>".$discount."% OFF</div>";
+			$html = "<div class='discount-box'>";
+			$html .= 	$discount;
+			$html .= 	$label;
+			$html .= "</div>";
 		}else{
-			return "";
+			$html = "";
 		}
-		var_dump($discount);
+		return $html;
 	}
 }
