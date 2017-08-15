@@ -21,8 +21,8 @@ class Cammino_Widgets_Helper_Data extends Mage_Core_Helper_Abstract
 
 		if($discount > 0){
 			$html = "<div class='discount-box'>";
-			$html .= 	$discount;
-			$html .= 	$label;
+			$html .= 	"<div class='value'>" . $discount . "</div>";
+			$html .= 	"<div class='label'>" . $label . "</div>";
 			$html .= "</div>";
 		}else{
 			$html = "";
