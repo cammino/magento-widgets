@@ -6,6 +6,7 @@
             <codePool>community</codePool>
             <depends>
 				<Cammino_Banners />
+				<Cammino_Themeconfig />
 			</depends>
         </Cammino_Widgets>
     </modules>
