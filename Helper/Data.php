@@ -19,6 +19,10 @@ class Cammino_Widgets_Helper_Data extends Mage_Core_Helper_Abstract
 		$labelBefore = Mage::getStoreConfig('themeconfig/themeconfig_group_product_item/themeconfig_product_item_discount_label_before');
 		$labelAfter = Mage::getStoreConfig('themeconfig/themeconfig_group_product_item/themeconfig_product_item_discount_label_after');
 
+		// Verifica se existem as variáveis no Themeconfig, se não, seta essas por padrão
+		if(gettype($labelBefore) == "NULL") { $labelBefore = "-"; }
+		if(gettype($labelAfter) == "NULL") { $labelAfter = "%"; }
+
 		$discount = $this->getPercentageDiscount($product);
 		$html = "";
 
