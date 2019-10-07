@@ -5,14 +5,22 @@ class Cammino_Widgets_Helper_Data extends Mage_Core_Helper_Abstract
 	/* Calcula porcentagem de desconto do produto */
 	public function getPercentageDiscount($product){
         $originalPrice = $product->getPrice();
-        $finalPrice = $product->getFinalPrice();
-        $percentage = 0;
+		$finalPrice = $product->getFinalPrice();
 
         if ($originalPrice > $finalPrice) {
-            $percentage = floor (($originalPrice - $finalPrice) * 100 / $originalPrice);
+			$percentage = (($originalPrice - $finalPrice) * 100 / $originalPrice);
+			$diff = abs($percentage - ceil($percentage));
+			$threshold = floatval(Mage::getStoreConfig('themeconfig/themeconfig_group_product_item/themeconfig_product_item_discount_threshold'));
+
+			if($threshold <= 0) {
+				$threshold = 0.15;
+			}
+			
+			// Se a diferença estiver entre o treshhold informado, arredonda a porcentagem para cima, se não arredonda para baixo
+			return $diff <= floatval($threshold) ? ceil($percentage) : floor($percentage);
         }
 
-        return $percentage;
+        return 0;
 	}
 
 	public function getDiscountBoxHtml($product){
