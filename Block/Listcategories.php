@@ -12,6 +12,10 @@ class Cammino_Widgets_Block_Listcategories extends Mage_Page_Block_Html {
 			}
 		}
 
+		usort($childrenCategories, function ($a, $b) {
+			return $a->getPosition() - $b->getPosition();
+		});
+
 		return $childrenCategories;
 	}
 }
